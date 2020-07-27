@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 import * as actions from '../store/actions'
 
 import * as f from 'fpx'
@@ -7,11 +7,8 @@ import * as f from 'fpx'
 class FullPost extends Component {
 
     componentDidMount(){
-        const { onFetchPost, post } = this.props
-        onFetchPost()
-        console.log(post)
-
-
+        const { onFetchPost, id } = this.props
+        onFetchPost(this.props.match.params.id)
     }
 
     render() {
@@ -53,7 +50,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchPost: () => dispatch(actions.fetchPost())
+        onFetchPost: (id) => dispatch(actions.fetchPost(id))
     }
 }
 

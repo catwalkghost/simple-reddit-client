@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import * as f from 'fpx'
 import * as actions from '../store/actions'
 
 import Post from './post'
 import Spinner from './spinner'
+import FullPost from './fullpost'
 
 class Posts extends Component {
 
@@ -15,7 +17,7 @@ class Posts extends Component {
     }
 
     render() {
-        const { posts, loading, error } = this.props
+        const { posts, loading, error, onFetchPost } = this.props
 
         let postsPage = <Spinner />
         if (!loading) {
@@ -24,13 +26,15 @@ class Posts extends Component {
                     {f.map(posts, post => {
                         const { id, title, thumbnail, url, author, smallImg } = post
                         return (
-                            <Post
-                                key={id}
-                                title={title}
-                                thumbnail={thumbnail}
-                                url={url}
-                                author={author}
-                                smallImg={smallImg} />
+                                <Post
+                                    onClick={(id) => {onFetchPost(id)} }
+                                    id={id}
+                                    key={id}
+                                    title={title}
+                                    thumbnail={thumbnail}
+                                    url={url}
+                                    author={author}
+                                    smallImg={smallImg} />
                         )
                     })}
                 </div>
@@ -53,7 +57,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchPosts: () => dispatch(actions.fetchPosts())
+        onFetchPosts: () => dispatch(actions.fetchPosts()),
+        onFetchPost: (id) => dispatch(actions.fetchPost(id))
     }
 }
 

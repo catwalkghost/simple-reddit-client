@@ -76,11 +76,11 @@ export const fetchPosts = () => {
     }
 }
 
-export const fetchPost = () => {
+export const fetchPost = (postId) => {
     return dispatch => {
         dispatch(fetchPostInit())
 
-        const queryParams = c.COMMENTS + c.TEST_ID + '.json'
+        const queryParams = c.COMMENTS + postId + '.json'
 
         fetch(c.BASE_URL + queryParams)
             .then(res => res.json()

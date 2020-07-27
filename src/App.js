@@ -9,8 +9,8 @@ function App() {
 
     const routes = (
         <Switch>
-            <Route path='/posts/:id' exact component={FullPost} />
-            <Route path='/' component={FullPost} />
+            <Route path='/posts/:id' exact render={(props) => <FullPost {...props} />} />
+            <Route path='/' component={Posts} />
             {/* redirect for unknown pages */}
             <Redirect to='/' />
         </Switch>
@@ -19,10 +19,10 @@ function App() {
   return (
     <div>
       <Layout>
-        <FullPost />
+          {routes}
       </Layout>
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
