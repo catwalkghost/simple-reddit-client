@@ -12,7 +12,7 @@ class FullPost extends Component {
     }
 
     render() {
-        const { post } = this.props
+        const { post, comments } = this.props
         const { id, thumbnail, title} = post
         return (
             <div style={{ display: 'flex', flexDirection: 'column', width: '500px' }}>
@@ -20,6 +20,7 @@ class FullPost extends Component {
                     key={id}
                     title={title}
                     thumbnail={thumbnail} />
+                <Comments comments={comments} />
             </div>
         )
     }
@@ -35,9 +36,37 @@ const PostBody = (props) => {
     )
 }
 
-const comment = (props) => {
-
+const Comments = (props) => {
+    const {comments} = props
+    return (
+        <div>
+            {!comments ? null :
+            f.map(comments, (level, i) => {
+                return (
+                    <div key={i} className="comment-block">
+                        {level.map(cmt => <Comment key={cmt.id} cmt={cmt} />)}
+                    </div>
+                )
+            })}
+        </div>
+    )
 }
+
+const Comment = (props) => {
+    const { cmt } = props
+    const { author, depth, score, body, body_html } = cmt
+    return (
+        <div className="comment" style={{ marginLeft: `${depth}rem` }}>
+            <div>
+                <span className="comment__author">{author}</span>
+                <span className="comment__score">{score}</span>
+            </div>
+            {/*<div dangerouslySetInnerHTML={{ __html: body_html }} />*/}
+            <p>{body}</p>
+        </div>
+    );
+};
+
 
 
 const mapStateToProps = state => {
