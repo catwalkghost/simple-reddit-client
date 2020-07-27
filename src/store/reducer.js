@@ -3,7 +3,7 @@ import * as u from '../shared/utils'
 
 const initialState = {
     posts: [],
-    post: {},
+    post: [{}],
     loading: false,
     error: null,
 }

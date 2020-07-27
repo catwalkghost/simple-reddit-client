@@ -2,18 +2,32 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import * as actions from '../store/actions'
 
+import * as f from 'fpx'
+
 class FullPost extends Component {
 
     componentDidMount(){
-        const { onFetchPost } = this.props
+        const { onFetchPost, post } = this.props
         onFetchPost()
+        console.log(post)
+
 
     }
 
     render() {
+        const { post } = this.props
+
         return (
             <div style={{ display: 'flex', flexDirection: 'column', width: '500px' }}>
-                Post Goes Here
+                {f.map(post, postData => {
+                    const { thumbnail, title } = postData
+                    return (
+                        <>
+                        <h3>{title}</h3>
+                        <img src={thumbnail} alt={title} />
+                        </>
+                    )
+                })}
             </div>
         )
     }

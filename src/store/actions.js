@@ -86,27 +86,27 @@ export const fetchPost = () => {
             .then(res => res.json()
                 .then(res => {
                     const { data } = res[0].data.children[0]
-
                     const img = data.preview.images[0].resolutions[3].url
-                    // let postData = []
-                    // f.map(data, item => {
-                    //     const { id } = item
-                    //     try {
-                    //         postData.push({
-                    //             id: id,
-                    //         })
-                    //     } catch (err) {
-                    //         console.log(err)
-                    //     }
-                    // })
 
+                    const postDetails = res[0].data.children
                     let postData = []
-                    f.map(res[0].data.children[0], item => {
-                        postData.push({
-                            id: item.data.id,
-                        })
+                    f.map(postDetails, item => {
+                        const { data: {id, title, thumbnail }} = item
+                        try {
+                            postData.push({
+                                id: id,
+                                title: title,
+                                img: img,
+                                thumbnail: thumbnail,
+                            })
+                        } catch (err) {
+                            console.log(err)
+                            dispatch(fetchPostError(err))
+                        }
+
                     })
-                    console.log(postData)
+                    console.log(data,postData)
+                    dispatch(fetchPostSuccess(postData))
                 }))
     }
 }
