@@ -4,6 +4,7 @@ import * as u from '../shared/utils'
 const initialState = {
     posts: [],
     post: [],
+    comments: [],
     loading: false,
     error: null,
 }
@@ -22,6 +23,7 @@ const fetchPostsSuccess = (state, action) => {
 const fetchPostSuccess = (state, action) => {
     return u.updateObject(state, {
         post: action.post,
+        comments: action.comments,
         loading: false,
     })
 }

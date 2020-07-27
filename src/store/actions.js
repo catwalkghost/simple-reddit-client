@@ -1,6 +1,7 @@
 import * as at from './actionTypes'
 import * as c from '../shared/const'
 import * as f from 'fpx'
+import * as u from '../shared/utils'
 
 export const fetchPostsInit = () => {
     return {
@@ -17,7 +18,8 @@ export const fetchPostInit = () => {
 export const fetchPostSuccess = (post) => {
     return {
         type: at.FETCH_POST_SUCCESS,
-        post: post,
+        post: post.post,
+        comments: post.comments,
     }
 }
 
@@ -76,6 +78,50 @@ export const fetchPosts = () => {
     }
 }
 
+// export const fetchPost = (postId) => {
+//     return dispatch => {
+//         dispatch(fetchPostInit())
+//
+//         const queryParams = c.COMMENTS + postId + '.json'
+//
+//         fetch(c.BASE_URL + queryParams)
+//             .then(res => res.json()
+//                 .then(res => {
+//                     const { data } = res[0].data.children[0]
+//
+//                     const postDetails = res[0].data.children
+//                     const postMore = res[1].data.children
+//                     let postData = []
+//                     f.map(postDetails, item => {
+//                         const { data: {id, title, thumbnail }} = item
+//                         try {
+//                             postData.push({
+//                                 id: id,
+//                                 title: title,
+//                                 img: thumbnail,
+//                                 thumbnail: thumbnail,
+//                             })
+//                         } catch (err) {
+//                             console.log(err)
+//                             dispatch(fetchPostError(err))
+//                         }
+//
+//                     })
+//                     console.log(data, postMore)
+//                     dispatch(fetchPostSuccess(postData))
+//                 }))
+//
+//         fetch(c.BASE_URL + queryParams)
+//             .then(res => res.json()
+//                 .then(res => {
+//                     console.log(u.commentsParser(res))
+//
+//                 })
+//                 .catch(err => console.log(err))
+//             )
+//     }
+// }
+
 export const fetchPost = (postId) => {
     return dispatch => {
         dispatch(fetchPostInit())
@@ -85,28 +131,12 @@ export const fetchPost = (postId) => {
         fetch(c.BASE_URL + queryParams)
             .then(res => res.json()
                 .then(res => {
-                    const { data } = res[0].data.children[0]
-                    const img = data.preview.images[0].resolutions[3].url
-
-                    const postDetails = res[0].data.children
-                    let postData = []
-                    f.map(postDetails, item => {
-                        const { data: {id, title, thumbnail }} = item
-                        try {
-                            postData.push({
-                                id: id,
-                                title: title,
-                                img: img,
-                                thumbnail: thumbnail,
-                            })
-                        } catch (err) {
-                            console.log(err)
-                            dispatch(fetchPostError(err))
-                        }
-
-                    })
-                    console.log(data,postData)
+                    const postData = u.commentsParser(res)
+                    console.log(res)
+                    console.log(postData.post, postData.comments)
                     dispatch(fetchPostSuccess(postData))
-                }))
+                })
+                .catch(err => console.log(err))
+            )
     }
 }

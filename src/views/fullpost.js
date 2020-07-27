@@ -7,23 +7,19 @@ import * as f from 'fpx'
 class FullPost extends Component {
 
     componentDidMount(){
-        const { onFetchPost, id } = this.props
-        onFetchPost(this.props.match.params.id)
+        const { onFetchPost, match: { params: { id }}} = this.props
+        onFetchPost(id)
     }
 
     render() {
         const { post } = this.props
+        const { id, thumbnail, title} = post
         return (
             <div style={{ display: 'flex', flexDirection: 'column', width: '500px' }}>
-                {f.map(post, postData => {
-                    const { id, thumbnail, title } = postData
-                    return (
-                        <PostBody
-                            key={id}
-                            title={title}
-                            thumbnail={thumbnail} />
-                    )
-                })}
+                <PostBody
+                    key={id}
+                    title={title}
+                    thumbnail={thumbnail} />
             </div>
         )
     }
@@ -39,10 +35,16 @@ const PostBody = (props) => {
     )
 }
 
+const comment = (props) => {
+
+}
+
+
 const mapStateToProps = state => {
-    const { post, loading, error } = state
+    const { post, comments, loading, error } = state
     return {
         post: post,
+        comments: comments,
         loading: loading,
         error: error,
     }
