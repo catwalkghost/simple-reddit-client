@@ -16,22 +16,30 @@ class FullPost extends Component {
 
     render() {
         const { post } = this.props
-
         return (
             <div style={{ display: 'flex', flexDirection: 'column', width: '500px' }}>
                 {f.map(post, postData => {
-                    const { thumbnail, title } = postData
+                    const { id, thumbnail, title } = postData
                     return (
-                        <>
-                        <h3>{title}</h3>
-                        <img src={thumbnail} alt={title} />
-                        </>
+                        <PostBody
+                            key={id}
+                            title={title}
+                            thumbnail={thumbnail} />
                     )
                 })}
             </div>
         )
     }
+}
 
+const PostBody = (props) => {
+    const { title, thumbnail } = props
+    return (
+        <div>
+            <h3>{title}</h3>
+            <img src={thumbnail} alt={title} />
+        </div>
+    )
 }
 
 const mapStateToProps = state => {
