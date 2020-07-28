@@ -15,9 +15,10 @@ $radius: 4px;
 $color-default-white:         hsl(0, 0%, 98%);     // #FAFAFA
 $color-default-black:         hsl(0, 0%, 14%);      // #242424
 
-$color-success:               hsl(136, 71%, 37%);   // #1BA13E
+$color-success:               hsl(136, 71%, 37%);   // #ABABAB
 $color-danger-error:          #CC0C0F;
 
+$color-grey:                  hsl(0, 0%, 68%);  // #D8E8EC
 $color-accent:                hsl(16, 92%, 57%);    // #F6642D
 $color-accent-light:          hsl(17, 89%, 71%);    // #F79671
 $color-accent-transparent:    hsla(16, 92%, 57%, .7);
@@ -59,6 +60,10 @@ $color-secondary:             #B0B0B0;
 
 .fg-primary {
   color: $color-primary;
+}
+
+.fg-grey {
+  color: $color-grey;
 }
 
 // Background Colors

@@ -45,8 +45,11 @@ const Comments = (props) => {
             {!comments ? null :
             f.map(comments, (level, i) => {
                 return (
-                    <div key={i} className="comment-block">
-                        {level.map(cmt => <Comment key={cmt.id} cmt={cmt} />)}
+                    <div key={i} className='comment-block'>
+                        {f.map(level, cmt => {
+                            const { id } = cmt
+                            return <Comment key={id} cmt={cmt}/>
+                        })}
                     </div>
                 )
             })}
@@ -56,15 +59,14 @@ const Comments = (props) => {
 
 const Comment = (props) => {
     const { cmt } = props
-    const { author, depth, score, body, body_html } = cmt
+    const { author, depth, score, body } = cmt
     return (
-        <div className="comment" style={{ marginLeft: `${depth}rem` }}>
-            <div>
-                <span className="comment__author">{author}</span>
-                <span className="comment__score">{score}</span>
+        <div className='padding-1' style={{ marginLeft: `${depth}rem` }}>
+            <div className='fg-grey font-weight-700'>
+                <span>{author}</span>
+                <span>{score}</span>
             </div>
-            {/*<div dangerouslySetInnerHTML={{ __html: body_html }} />*/}
-            <p>{body}</p>
+            <p className='comment-body'>{body}</p>
         </div>
     );
 };

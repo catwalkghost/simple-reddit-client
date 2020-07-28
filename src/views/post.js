@@ -39,7 +39,7 @@ export const Post = (props) => {
 const Award = (props) => {
     const {img, count} = props
     return (
-        <div className='row-start-center'>
+        <div className='row-start-center fg-grey font-weight-700'>
             <img src={img} alt='awards' className='award' />
             <span className='padding-l-0x25'>{count}</span>
         </div>
@@ -50,8 +50,9 @@ const Award = (props) => {
 const AuthorBlock = (props) => {
     const {authorName, date} = props
     return(
-        <div className='row-start-center'>
-            <span>Posted by u/{authorName} {date}</span>
+        <div className='row-start-center fg-grey gaps-h-0x25'>
+            <span>{`Posted by u/${authorName}`}</span>
+            <span>{date}</span>
         </div>
     )
 }
@@ -59,7 +60,7 @@ const AuthorBlock = (props) => {
 const Reactions = (props) => {
     const {upVotes, commentCount} = props
     return (
-        <div className='row-start-center gaps-h-0x5 width-100p'>
+        <div className='row-start-center gaps-h-0x5 width-100p fg-grey font-weight-700'>
             <div className='row-start-center gaps-h-0x25'>
                 <s.UpVote />
                 {upVotes}

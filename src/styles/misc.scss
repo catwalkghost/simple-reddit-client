@@ -156,12 +156,25 @@
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+  @include media-sm {
+    width: 90%;
+    max-width: 90%;
+  }
 }
 
 // Comments Block
 .comments-block {
   max-width: 640px;
   width: 640px;
+  @include media-sm {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.comment-body {
+  display: inline-block;
+  overflow-wrap: anywhere;
 }
 
 // Award
