@@ -15,7 +15,8 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "stylebox": "^0.0.15"
+    "stylebox": "^0.0.15",
+    "timeago.js": "^4.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

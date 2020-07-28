@@ -1,3 +1,5 @@
+import * as f from 'fpx'
+
 // A simple util to update objects immutably. Handy for Redux
 export const updateObject = (oldObject, updatedProps) => {
     return {
@@ -45,4 +47,8 @@ const getReplies = (comment) => {
 
 export const getCount = ({count}) => {
     return count
+}
+
+export const thousandsToK = (num) => {
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(0)) + 'K' : Math.sign(num)*Math.abs(num)
 }

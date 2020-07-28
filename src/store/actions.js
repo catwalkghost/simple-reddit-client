@@ -58,16 +58,18 @@ export const fetchPosts = () => {
                         let fetchedPosts = []
 
                         f.map(children, post => {
-                            const { data: { id, title, thumbnail, url, author, smallImg, all_awardings } } = post
+                            const { data: { id, title, thumbnail, url, author, smallImg, all_awardings, created_utc, ups } } = post
                             try {
                                 fetchedPosts.push({
                                     id: id,
                                     title: title,
+                                    date: created_utc,
                                     thumbnail: thumbnail,
                                     url: url,
                                     author: author,
                                     smallImg: smallImg,
                                     awards: all_awardings,
+                                    upVotes: ups,
                                 })
                             } catch (err) {
                                 dispatch(fetchPostsError(err))
