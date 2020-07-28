@@ -1,5 +1,4 @@
 import React from 'react'
-import * as u from './utils'
 
 const svgProps = ({className: cls, ...props}) => {
     return {

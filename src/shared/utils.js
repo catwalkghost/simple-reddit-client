@@ -1,6 +1,11 @@
 import * as f from 'fpx'
 import * as c from './const'
 
+// Checks if a string not empty
+export const isNonEmptyString = (value) => {
+    return f.isString(value) && value.trim() !== ''
+}
+
 // A simple util to update objects immutably. Handy for Redux
 export const updateObject = (oldObject, updatedProps) => {
     return {

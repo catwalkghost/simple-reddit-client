@@ -9,9 +9,10 @@ const initialState = {
     error: null,
 }
 
-const loadingFalse = (state, action) => {
-    return u.updateObject(state, {loadingFalse})
+const loadingTrue = (state, action) => {
+    return u.updateObject(state, {loading: true})
 }
+
 
 const fetchPostsSuccess = (state, action) => {
     return u.updateObject(state, {
@@ -28,25 +29,32 @@ const fetchPostSuccess = (state, action) => {
     })
 }
 
+const fetchError = (state, action) => {
+    return u.updateObject(state, {
+        error: action.error,
+        loading: false,
+    })
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case at.FETCH_POSTS_INIT:
-            return loadingFalse(state, action)
+            return loadingTrue(state, action)
 
         case at.FETCH_POSTS_SUCCESS:
             return fetchPostsSuccess(state,action)
 
         case at.FETCH_POSTS_ERROR:
-            return loadingFalse(state, action)
+            return fetchError(state, action)
 
         case at.FETCH_POST_INIT:
-            return loadingFalse(state, action)
+            return loadingTrue(state, action)
 
         case at.FETCH_POST_SUCCESS:
             return fetchPostSuccess(state,action)
 
         case at.FETCH_POST_ERROR:
-            return loadingFalse(state, action)
+            return fetchError(state, action)
 
         default:
             return state

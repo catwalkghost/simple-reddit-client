@@ -34,6 +34,7 @@ export const fetchPostsSuccess = (fetchedPosts) => {
     return {
         type: at.FETCH_POSTS_SUCCESS,
         posts: fetchedPosts,
+        hasMore: fetchedPosts.length > 1,
     }
 }
 
@@ -79,6 +80,9 @@ export const fetchPosts = () => {
                         // console.log(fetchedPosts)
                         dispatch(fetchPostsSuccess(fetchedPosts))
                     }))
+            .catch(err => {
+                dispatch(fetchPostsError(err))
+            })
     }
 }
 
@@ -95,7 +99,9 @@ export const fetchPost = (postId) => {
                     console.log(postData.post, postData.comments)
                     dispatch(fetchPostSuccess(postData))
                 })
-                .catch(err => console.log(err))
             )
+            .catch(err => {
+                dispatch(fetchPostError(err))
+            })
     }
 }

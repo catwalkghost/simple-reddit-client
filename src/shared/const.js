@@ -5,3 +5,4 @@ export const TEST_ID = 'haucpf'
 export const TITLE = 'Simple Reddit Viewer'
 export const KEY_CODE_ENTER = 13
 export const KEY_CODE_SPACE = 32
+export const LOADING = 'Loading...'

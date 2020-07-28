@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-
 import * as f from 'fpx'
 import * as actions from '../store/actions'
 
-import Spinner from './spinner'
+import * as c from '../shared/const'
+import * as m from '../shared/misc'
+
 import { Post } from './post'
 
 class Posts extends Component {
@@ -16,14 +16,14 @@ class Posts extends Component {
     }
 
     render() {
-        const { posts, loading, error, onFetchPost } = this.props
+        const { posts, loading, error } = this.props
 
-        let postsPage = <Spinner />
+        let postsPage = <m.LoadingIndicator loadingText={c.LOADING} />
         if (!loading) {
             postsPage = (
                 <div className='width-100p gaps-v-4'>
                     {f.map(posts, post => {
-                        const { id, title, date, thumbnail, url, author, smallImg, awards, upVotes, commentCount } = post
+                        const { id, title, date, thumbnail, url, author, awards, upVotes, commentCount } = post
                         return (
                                 <Post
                                     id={id}
@@ -40,6 +40,9 @@ class Posts extends Component {
                     })}
                 </div>
             )
+        }
+        if (error) {
+            postsPage= <m.ErrorText errorText={error}/>
         }
 
         return postsPage
