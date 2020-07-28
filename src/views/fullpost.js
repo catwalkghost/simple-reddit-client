@@ -1,8 +1,10 @@
 import React, {Component} from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import * as actions from '../store/actions'
-
+import {Helmet} from 'react-helmet'
 import * as f from 'fpx'
+import * as c from '../shared/const'
+import {Post} from './post'
 
 class FullPost extends Component {
 
@@ -13,33 +15,33 @@ class FullPost extends Component {
 
     render() {
         const { post, comments } = this.props
-        const { id, thumbnail, title} = post
+        const { id, title, created_utc, url, author, all_awardings, ups, num_comments } = post
         return (
-            <div style={{ display: 'flex', flexDirection: 'column', width: '500px' }}>
-                <PostBody
-                    key={id}
-                    title={title}
-                    thumbnail={thumbnail} />
-                <Comments comments={comments} />
-            </div>
+            <>
+                <Helmet title={`${title} | ${c.TITLE}`}/>
+                <div className='col-center-center width-100p'>
+                    <Post
+                        id={id}
+                        key={id}
+                        title={title}
+                        date={created_utc}
+                        url={url}
+                        author={author}
+                        upVotes={ups}
+                        commentCount={num_comments}
+                        awards={all_awardings} />
+                    <Comments comments={comments} />
+                </div>
+            </>
         )
     }
 }
 
-const PostBody = (props) => {
-    const { title, thumbnail } = props
-    return (
-        <div>
-            <h3>{title}</h3>
-            <img src={thumbnail} alt={title} />
-        </div>
-    )
-}
 
 const Comments = (props) => {
     const {comments} = props
     return (
-        <div>
+        <div className='col-start-center comments-block'>
             {!comments ? null :
             f.map(comments, (level, i) => {
                 return (

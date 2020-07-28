@@ -54,7 +54,7 @@ export const fetchPosts = () => {
                 res.json()
                     .then((res) => {
                         const { data: { children} } = res
-                        console.log(children)
+                        // console.log(children)
                         let fetchedPosts = []
 
                         f.map(children, post => {
@@ -76,7 +76,7 @@ export const fetchPosts = () => {
                                 dispatch(fetchPostsError(err))
                             }
                         })
-                        console.log(fetchedPosts)
+                        // console.log(fetchedPosts)
                         dispatch(fetchPostsSuccess(fetchedPosts))
                     }))
     }
@@ -92,7 +92,6 @@ export const fetchPost = (postId) => {
             .then(res => res.json()
                 .then(res => {
                     const postData = u.commentsParser(res)
-                    console.log(res)
                     console.log(postData.post, postData.comments)
                     dispatch(fetchPostSuccess(postData))
                 })

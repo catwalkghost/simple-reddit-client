@@ -152,9 +152,16 @@
   @extend .rounded-2x;
   @extend .margin-v-2;
   @extend .padding-1;
+  width: 640px;
   max-width: 640px;
   margin-left: auto;
   margin-right: auto;
+}
+
+// Comments Block
+.comments-block {
+  max-width: 640px;
+  width: 640px;
 }
 
 // Award
