@@ -42,3 +42,7 @@ const getReplies = (comment) => {
     })
     return replies
 }
+
+export const getCount = ({count}) => {
+    return count
+}

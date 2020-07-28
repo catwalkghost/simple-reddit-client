@@ -24,7 +24,7 @@ class Posts extends Component {
             postsPage = (
                 <div>
                     {f.map(posts, post => {
-                        const { id, title, thumbnail, url, author, smallImg } = post
+                        const { id, title, thumbnail, url, author, smallImg, awards } = post
                         return (
                                 <Post
                                     onClick={(id) => {onFetchPost(id)} }
@@ -34,7 +34,8 @@ class Posts extends Component {
                                     thumbnail={thumbnail}
                                     url={url}
                                     author={author}
-                                    smallImg={smallImg} />
+                                    smallImg={smallImg}
+                                    awards={awards} />
                         )
                     })}
                 </div>
