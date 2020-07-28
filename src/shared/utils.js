@@ -1,4 +1,5 @@
 import * as f from 'fpx'
+import * as c from './const'
 
 // A simple util to update objects immutably. Handy for Redux
 export const updateObject = (oldObject, updatedProps) => {
@@ -49,6 +50,46 @@ export const getCount = ({count}) => {
     return count
 }
 
-export const thousandsToK = (num) => {
-    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(0)) + 'K' : Math.sign(num)*Math.abs(num)
+export const thousandsToK = (num, fractionDigits) => {
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(fractionDigits)) + 'K' : Math.sign(num)*Math.abs(num)
+}
+
+// Fake Button props
+
+/*
+Usage:
+
+  <span {...u.fakeButtonProps({onClick: someAction})}>
+    label
+  </span>
+
+Usable for layouts unsupported by the native button element, such as a flex
+container. Doesn't work for submit buttons. Supports focus and keyboard
+activation. Last resort, try native buttons first.
+*/
+export const fakeButtonProps = ({onClick, disabled, readOnly, ...props} = {}) => {
+    disabled = Boolean(disabled || readOnly)
+    return {
+        role: 'button',
+        tabIndex: disabled ? undefined : 0,
+        onKeyPress: (onClick && !disabled)
+            ? simulateActivationOnKeyPress.bind(undefined, onClick)
+            : undefined,
+        onClick,
+        disabled,
+        ...props,
+    }
+}
+
+const simulateActivationOnKeyPress = (onClick, event) => {
+    f.validate(onClick, f.isFunction)
+    if (event.keyCode === c.KEY_CODE_ENTER) {
+        onClick(event)
+        return
+    }
+    if (event.keyCode === c.KEY_CODE_SPACE) {
+        // Prevent default scroll on Space
+        event.preventDefault()
+        onClick(event)
+    }
 }

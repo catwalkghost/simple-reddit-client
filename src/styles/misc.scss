@@ -1,0 +1,163 @@
+// Atomic styles for Circle Userpic
+.bg-circle {
+  @include bg-cover-circle;
+}
+
+.bg-circle-trick {
+  @include bg-cover-circle;
+  @include height-percentage-trick(100%);
+}
+
+// Atomic styles for object-fit
+.fitted-image {
+  @extend .width-100p;
+  @extend .fit-cover;
+
+  @include media-not-lg {
+    width: 70vw;
+    min-width: 70vw;
+    max-width: 70vw;
+    min-height: 70vh;
+    max-height: 70vh;
+  }
+
+  @include media-lg {
+    width: 90vw;
+    min-width: 90vw;
+    max-width: 90vw;
+    min-height: 80vh;
+    max-height: 80vh;
+  }
+
+}
+
+// Layout
+.layout-container {
+  @extend .row-center-center;
+  @extend .width-100p;
+  @extend .height-100vh;
+}
+
+// Image Container
+.image-container {
+  @extend .col-center-center;
+
+  @include media-not-lg {
+    min-width: 70vw;
+    max-width: 70vw;
+
+    min-height: 70vh;
+    max-height: 70vh;
+  }
+
+  @include media-lg {
+    min-width: 90vw;
+    max-width: 90vw;
+
+    min-height: 90vh;
+    max-height: 90vh;
+  }
+}
+
+// Animated Button
+.animated-button {
+  @extend .font-weight-400;
+  @extend .relative;
+  @extend .animated;
+  @extend .block;
+
+  @extend .padding-v-0x5;
+  @extend .padding-h-2;
+  @extend .text-center;
+
+  @extend .fg-primary;
+  @extend .text-uppercase;
+
+  @extend .font-h3;
+
+  border: 1px solid $color-primary;
+}
+
+.animated-button span {
+  @extend .relative;
+  z-index: 2;
+}
+
+.animated-button:after{
+  @extend .abs;
+  @extend .animated;
+  @extend .height-100p;
+  @extend .bg-accent;
+
+  top: 0;
+  left: 0;
+  width: 0;
+  content: "";
+}
+
+.animated-button:hover{
+  @extend .fg-white;
+}
+
+.animated-button:hover:after{
+  @extend .width-100p;
+}
+
+// Loading animation
+
+.pulsating {
+  @extend .margin-1;
+
+  height: 2rem;
+  width: 2rem;
+
+  background: $color-shadow;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 $color-shadow;
+
+  transform: scale(1);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 $color-accent-transparent;
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 1rem $color-accent-invisible;
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 $color-accent-invisible;
+  }
+}
+
+// Author Block
+.author-block-container {
+  @extend .row-start-center;
+  @extend .gaps-h-0x5;
+  @extend .padding-v-1;
+  @extend .padding-h-0x5;
+  @extend .fg-primary;
+}
+
+// Card
+.post-card {
+  @extend .col-center-center;
+  @extend .border-primary;
+  @extend .rounded-2x;
+  @extend .margin-v-2;
+  @extend .padding-1;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Award
+.award {
+  max-width: 20px;
+}
