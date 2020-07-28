@@ -99,9 +99,10 @@ export const fetchPost = (postId) => {
                     console.log(postData.post, postData.comments)
                     dispatch(fetchPostSuccess(postData))
                 })
+                .catch(err => {
+                    dispatch(fetchPostError(err))
+                })
             )
-            .catch(err => {
-                dispatch(fetchPostError(err))
-            })
+
     }
 }
