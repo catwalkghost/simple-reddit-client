@@ -1,7 +1,10 @@
 # Simple Reddit Viewer
 
 A simple React app to view top posts from [r/pics](https://www.reddit.com/r/pics/).
+Can be extended to work with other subs. Sub selection can also be added.
 Support clicking through to an individual post and viewing comments.
+Infinite scroll with lazy load is not yet implemented. 
+Awards currently display top three awards. This can be changed to display all awards.
 
 ## Installation
 
